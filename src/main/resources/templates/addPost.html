@@ -28,9 +28,9 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#">Главная</a>
                 <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
+                <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
                 <a class="nav-item nav-link active" th:href="@{/addPost}">Добавить вакансию</a>
                 <a class="nav-item nav-link" th:href="@{/addCandidate}">Добавить кандидата</a>
-                <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
             </div>
         </div>
     </nav>
@@ -41,14 +41,14 @@
             </div>
             <div class="card-body">
                 <form th:action="@{/savePost}" method="POST">
+                    <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
                         <label for="name">Название вакансии
-                        <input type="text" class="form-control" name="name" id="name">
+                            <input type="text" class="form-control" name="name" id="name">
                         </label>
                         <label for="name">Описание вакансии
-                        <input type="text" class="form-control" name="description" id="description">
+                            <input type="text" class="form-control" name="description" id="description">
                         </label>
-                        <input type="hidden" name="id" value="0"/>
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

@@ -14,15 +14,12 @@ public class PostStore {
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private final AtomicInteger id = new AtomicInteger();
 
-    private PostStore() {
-    }
-
     public static PostStore instOf() {
         return INST;
     }
 
     public void add(Post post) {
-        int newId = id.incrementAndGet();
+        int newId = id.getAndIncrement();
         post.setId(newId);
         posts.putIfAbsent(newId, post);
     }

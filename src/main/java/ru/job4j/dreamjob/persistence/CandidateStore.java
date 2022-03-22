@@ -10,14 +10,9 @@ import ru.job4j.dreamjob.model.Candidate;
 
 @Repository
 public class CandidateStore {
-    private static final CandidateStore INST = new CandidateStore();
 
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
     private final AtomicInteger id = new AtomicInteger(0);
-
-    public static CandidateStore instOf() {
-        return INST;
-    }
 
     public void add(Candidate candidate) {
         int newId = id.incrementAndGet();

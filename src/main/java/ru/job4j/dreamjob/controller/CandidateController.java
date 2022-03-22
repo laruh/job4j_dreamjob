@@ -12,7 +12,7 @@ import ru.job4j.dreamjob.services.CandidateService;
 
 @Controller
 public class CandidateController {
-    private CandidateService service;
+    private final CandidateService service;
 
     public CandidateController(CandidateService service) {
         this.service = service;

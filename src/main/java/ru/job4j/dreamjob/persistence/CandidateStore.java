@@ -5,9 +5,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 
+@ThreadSafe
 @Repository
 public class CandidateStore {
 
@@ -29,6 +31,11 @@ public class CandidateStore {
     }
 
     public void update(Candidate candidate) {
-        candidates.replace(candidate.getId(), candidate);
+        candidates.computeIfPresent(candidate.getId(), (key, value) -> {
+            if (candidate.getId() != value.getId()) {
+                throw new OptimisticException("Id is not equal");
+            }
+            return new Candidate(candidate.getId(), candidate.getName(), candidate.getDesc());
+        });
     }
 }

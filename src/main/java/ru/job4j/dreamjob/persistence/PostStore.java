@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.persistence;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Post;
 
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@ThreadSafe
 @Repository
 public class PostStore {
 
@@ -29,6 +31,11 @@ public class PostStore {
     }
 
     public void update(Post post) {
-        posts.replace(post.getId(), post);
+        posts.computeIfPresent(post.getId(), (key, value) -> {
+            if (post.getId() != value.getId()) {
+                throw new OptimisticException("Id is not equal");
+            }
+            return new Post(post.getId(), post.getName(), post.getDescription());
+        });
     }
 }

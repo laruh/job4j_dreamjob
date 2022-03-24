@@ -35,7 +35,8 @@ public class PostStore {
             if (post.getId() != value.getId()) {
                 throw new OptimisticException("Id is not equal");
             }
-            return new Post(post.getId(), post.getName(), post.getDescription());
+            return new Post(post.getId(), post.getName(),
+                    post.getDescription(), post.isVisible(), post.getCity());
         });
     }
 }

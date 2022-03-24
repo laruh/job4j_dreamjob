@@ -46,16 +46,19 @@
             </thead>
             <tbody>
             <tr th:each="candidate: ${candidates}">
-                <td th:text="${candidate.id}"></td>
                 <td>
                     <a th:href="@{|/updateCandidate/${candidate.id}|}">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <span th:text="${candidate.name}"></span>
-                    <span th:text="${candidate.desc}"></span>
+                    <span th:text="${candidate.id}"></span>
+                </td>
+                <td th:text="${candidate.name}"></td>
+                <td th:text="${candidate.desc}"></td>
+                <td>
                     <span th:text="${candidate.created}"></span>
                     <span th:if="${candidate.visible}">
-                        <i class="fa fa-check-square-o"></i></span>
+                        <i class="fa fa-check-square-o"></i>
+                    </span>
                     <span th:if="${!candidate.visible}">
                         <i class="fa fa-square-o"></i>
                     </span>

@@ -46,13 +46,15 @@
             </thead>
             <tbody>
             <tr th:each="post: ${posts}">
-                <td th:text="${post.id}"></td>
                 <td>
                     <a th:href="@{|/updatePost/${post.id}|}">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <span th:text="${post.name}"></span>
-                    <span th:text="${post.description}"></span>
+                    <span th:text="${post.id}"></span>
+                </td>
+                <td th:text="${post.name}"></td>
+                <td th:text="${post.description}"></td>
+                <td>
                     <span th:text="${post.created}"></span>
                     <span th:if="${post.visible}">
                         <i class="fa fa-check-square-o"></i>

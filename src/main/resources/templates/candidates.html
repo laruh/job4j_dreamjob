@@ -54,6 +54,11 @@
                     <span th:text="${candidate.name}"></span>
                     <span th:text="${candidate.desc}"></span>
                     <span th:text="${candidate.created}"></span>
+                    <span th:if="${candidate.visible}">
+                        <i class="fa fa-check-square-o"></i></span>
+                    <span th:if="${!candidate.visible}">
+                        <i class="fa fa-square-o"></i>
+                    </span>
                 </td>
             </tr>
             </tbody>

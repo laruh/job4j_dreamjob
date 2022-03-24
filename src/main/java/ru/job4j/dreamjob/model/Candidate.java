@@ -10,6 +10,7 @@ public class Candidate {
     private String desc;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private final String created = LocalDateTime .now().format(formatter);
+    private boolean visible;
 
     public Candidate(int id, String name, String desc) {
         this.id = id;
@@ -43,6 +44,14 @@ public class Candidate {
 
     public String getCreated() {
         return created;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     @Override

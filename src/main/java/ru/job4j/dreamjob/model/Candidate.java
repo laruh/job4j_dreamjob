@@ -11,11 +11,22 @@ public class Candidate {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private final String created = LocalDateTime .now().format(formatter);
     private boolean visible;
+    private byte[] photo;
+
+    public Candidate() {
+    }
 
     public Candidate(int id, String name, String desc) {
         this.id = id;
         this.name = name;
         this.desc = desc;
+    }
+
+    public Candidate(int id, String name, String desc, byte[] photo) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -52,6 +63,14 @@ public class Candidate {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Override

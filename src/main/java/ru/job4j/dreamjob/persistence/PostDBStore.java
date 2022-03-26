@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PostDataBaseStore {
+public class PostDBStore {
     private final BasicDataSource pool;
 
-    public PostDataBaseStore(BasicDataSource pool) {
+    public PostDBStore(BasicDataSource pool) {
         this.pool = pool;
     }
 

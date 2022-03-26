@@ -1,4 +1,5 @@
-create table if not exists jobs (
-    id serial primary key,
-    name varchar(2000)
+CREATE TABLE if not exists post (
+   id SERIAL PRIMARY KEY,
+   name TEXT,
+   description TEXT
 );

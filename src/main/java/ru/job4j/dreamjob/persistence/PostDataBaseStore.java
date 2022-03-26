@@ -2,7 +2,6 @@ package ru.job4j.dreamjob.persistence;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
-import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 
 import java.sql.*;
@@ -10,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PostDBStore {
+public class PostDataBaseStore {
     private final BasicDataSource pool;
 
-    public PostDBStore(BasicDataSource pool) {
+    public PostDataBaseStore(BasicDataSource pool) {
         this.pool = pool;
     }
 

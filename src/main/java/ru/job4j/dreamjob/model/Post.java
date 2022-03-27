@@ -84,11 +84,24 @@ public class Post implements Serializable {
             return false;
         }
         Post post = (Post) o;
-        return id == post.id;
+        return id == post.id
+                && Objects.equals(name, post.name)
+                && Objects.equals(description, post.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{"
+                + "id=" + id
+                + ", name='" + name
+                + '\''
+                + ", description='" + description
+                + '\''
+                + '}';
     }
 }

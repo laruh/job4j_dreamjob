@@ -74,6 +74,15 @@ public class PostDBStore {
         }
     }
 
+    public void deleteFrom() {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("TRUNCATE TABLE post RESTART IDENTITY")) {
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public Post findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM post WHERE id = ?")

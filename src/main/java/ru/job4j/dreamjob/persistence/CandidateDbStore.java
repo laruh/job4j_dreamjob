@@ -74,6 +74,16 @@ public class CandidateDbStore {
         }
     }
 
+    public void deleteFrom() {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(
+                     "TRUNCATE TABLE candidate RESTART IDENTITY")) {
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public Candidate findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM candidate WHERE id = ?")

@@ -81,12 +81,25 @@ public class Candidate {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Candidate post = (Candidate) o;
-        return id == post.id;
+        Candidate candidate = (Candidate) o;
+        return id == candidate.id
+                && Objects.equals(name, candidate.name)
+                && Objects.equals(description, candidate.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, description);
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{"
+                + "id=" + id
+                + ", name='" + name
+                + '\''
+                + ", description='" + description
+                + '\''
+                + '}';
     }
 }

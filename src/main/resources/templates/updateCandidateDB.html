@@ -1,7 +1,6 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -27,46 +26,33 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#">Главная</a>
-                <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
-                <a class="nav-item nav-link active" th:href="@{/candidates}">Кандидаты</a>
-                <a class="nav-item nav-link" th:href="@{/addPost}">Добавить вакансию</a>
-                <a class="nav-item nav-link" th:href="@{/addCandidate}">Добавить кандидата</a>
+                <a class="nav-item nav-link" th:href="@{/postsDB}">Вакансии</a>
+                <a class="nav-item nav-link" th:href="@{/candidatesDB}">Кандидаты</a>
+                <a class="nav-item nav-link" th:href="@{/addPostDB}">Добавить вакансию</a>
+                <a class="nav-item nav-link" th:href="@{/addCandidateDB}">Добавить кандидата</a>
             </div>
         </div>
     </nav>
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#Id</th>
-                <th scope="col">Имя кандидата</th>
-                <th scope="col">Описание кандидата</th>
-                <th scope="col">Дата регистрации</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="candidate: ${candidates}">
-                <td>
-                    <a th:href="@{|/updateCandidate/${candidate.id}|}">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <span th:text="${candidate.id}"></span>
-                    <img th:width="150" th:high="150" th:src="@{|/photoCandidate/${candidate.id}|}">
-                </td>
-                <td th:text="${candidate.name}"></td>
-                <td th:text="${candidate.description}"></td>
-                <td>
-                    <span th:text="${candidate.created}"></span>
-                    <span th:if="${candidate.visible}">
-                        <i class="fa fa-check-square-o"></i>
-                    </span>
-                    <span th:if="${!candidate.visible}">
-                        <i class="fa fa-square-o"></i>
-                    </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="row pt-3">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Редактирование кандидата.
+            </div>
+            <div class="card-body">
+                <form th:action="@{/updateCandidateDB}" method="POST" th:object="${candidate}" enctype="multipart/form-data">
+                    <input type="hidden" name="id" th:field="*{id}"/>
+                    <div class="form-group">
+                        <label for="name">Имя кандидата
+                            <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
+                        </label>
+                        <label for="name">Описание кандидата
+                            <input type="text" class="form-control" name="desc" id="description" th:field="*{description}">
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

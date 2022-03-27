@@ -35,8 +35,8 @@ public class CandidateStore {
             if (candidate.getId() != value.getId()) {
                 throw new OptimisticException("Id is not equal");
             }
-            return new Candidate(candidate.getId(), candidate.getName(), candidate.getDesc(),
-                    candidate.getPhoto());
+            return new Candidate(candidate.getId(), candidate.getName(),
+                    candidate.getDescription());
         });
     }
 }

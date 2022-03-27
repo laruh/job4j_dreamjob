@@ -3,3 +3,9 @@ CREATE TABLE if not exists post (
    name TEXT,
    description TEXT
 );
+
+CREATE TABLE if not exists candidate (
+   id SERIAL PRIMARY KEY,
+   name TEXT,
+   description TEXT
+);

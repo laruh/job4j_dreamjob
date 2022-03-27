@@ -27,10 +27,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#">Главная</a>
-                <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
-                <a class="nav-item nav-link active" th:href="@{/candidates}">Кандидаты</a>
-                <a class="nav-item nav-link" th:href="@{/addPost}">Добавить вакансию</a>
-                <a class="nav-item nav-link" th:href="@{/addCandidate}">Добавить кандидата</a>
+                <a class="nav-item nav-link" th:href="@{/postsDB}">Вакансии</a>
+                <a class="nav-item nav-link active" th:href="@{/candidatesDB}">Кандидаты</a>
+                <a class="nav-item nav-link" th:href="@{/addPostDB}">Добавить вакансию</a>
+                <a class="nav-item nav-link" th:href="@{/addCandidateDB}">Добавить кандидата</a>
             </div>
         </div>
     </nav>
@@ -41,29 +41,18 @@
                 <th scope="col">#Id</th>
                 <th scope="col">Имя кандидата</th>
                 <th scope="col">Описание кандидата</th>
-                <th scope="col">Дата регистрации</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="candidate: ${candidates}">
                 <td>
-                    <a th:href="@{|/updateCandidate/${candidate.id}|}">
+                    <a th:href="@{|/updateCandidateDB/${candidate.id}|}">
                         <i class="fa fa-edit"></i>
                     </a>
                     <span th:text="${candidate.id}"></span>
-                    <img th:width="150" th:high="150" th:src="@{|/photoCandidate/${candidate.id}|}">
                 </td>
                 <td th:text="${candidate.name}"></td>
                 <td th:text="${candidate.description}"></td>
-                <td>
-                    <span th:text="${candidate.created}"></span>
-                    <span th:if="${candidate.visible}">
-                        <i class="fa fa-check-square-o"></i>
-                    </span>
-                    <span th:if="${!candidate.visible}">
-                        <i class="fa fa-square-o"></i>
-                    </span>
-                </td>
             </tr>
             </tbody>
         </table>

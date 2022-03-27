@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
-    private String desc;
+    private String description;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     private final String created = LocalDateTime .now().format(formatter);
     private boolean visible;
@@ -16,16 +16,16 @@ public class Candidate {
     public Candidate() {
     }
 
-    public Candidate(int id, String name, String desc) {
+    public Candidate(int id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.description = description;
     }
 
-    public Candidate(int id, String name, String desc, byte[] photo) {
+    public Candidate(int id, String name, String description, byte[] photo) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.photo = photo;
     }
 
@@ -45,12 +45,12 @@ public class Candidate {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreated() {

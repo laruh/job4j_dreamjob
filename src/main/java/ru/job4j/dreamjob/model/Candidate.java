@@ -20,14 +20,6 @@ public class Candidate {
         this.description = description;
     }
 
-    public Candidate(int id, String name, String description, boolean visible, byte[] photo) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.visible = visible;
-        this.photo = photo;
-    }
-
     public Candidate(int id, String name, String description, LocalDateTime created,
                      boolean visible, byte[] photo) {
         this.id = id;

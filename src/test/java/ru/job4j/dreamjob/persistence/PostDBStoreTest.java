@@ -2,7 +2,7 @@ package ru.job4j.dreamjob.persistence;
 
 import org.junit.After;
 import org.junit.Test;
-import ru.job4j.dreamjob.Main;
+import ru.job4j.dreamjob.config.DataBaseConnection;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 import java.util.List;
@@ -14,13 +14,13 @@ public class PostDBStoreTest {
 
     @After
     public void whenDeleteFrom() {
-        PostDBStore store = new PostDBStore(new Main().loadPool());
+        PostDBStore store = new PostDBStore(new DataBaseConnection().loadPool());
         store.deleteFrom();
     }
 
     @Test
     public void whenCreatePost() {
-        PostDBStore store = new PostDBStore(new Main().loadPool());
+        PostDBStore store = new PostDBStore(new DataBaseConnection().loadPool());
         City city = new City(1, "Москва");
         Post post = new Post(1, "Java", "Spring, Java 17", true, city);
         store.add(post);
@@ -30,7 +30,7 @@ public class PostDBStoreTest {
 
     @Test
     public void whenUpdatePost() {
-        PostDBStore store = new PostDBStore(new Main().loadPool());
+        PostDBStore store = new PostDBStore(new DataBaseConnection().loadPool());
         City city = new City(1, "Москва");
         Post post = new Post(1, "Middle", "Spring, Java 17", false, city);
         store.add(post);
@@ -42,7 +42,7 @@ public class PostDBStoreTest {
 
     @Test
     public void whenFindAll() {
-        PostDBStore store = new PostDBStore(new Main().loadPool());
+        PostDBStore store = new PostDBStore(new DataBaseConnection().loadPool());
         City city = new City(1, "Москва");
         Post post1 = new Post(1, "Middle", "Java 17", false, city);
         Post post2 = new Post(2, "Senior", "Kotlin", true, city);

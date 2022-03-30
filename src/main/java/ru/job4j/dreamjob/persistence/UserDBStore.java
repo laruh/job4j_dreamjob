@@ -1,9 +1,9 @@
 package ru.job4j.dreamjob.persistence;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.User;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,9 +14,9 @@ import java.util.Optional;
 
 @Repository
 public class UserDBStore {
-    private final BasicDataSource pool;
+    private final DataSource pool;
 
-    public UserDBStore(BasicDataSource pool) {
+    public UserDBStore(DataSource pool) {
         this.pool = pool;
     }
 

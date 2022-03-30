@@ -1,9 +1,9 @@
 package ru.job4j.dreamjob.persistence;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.City;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,9 +13,9 @@ import java.util.List;
 
 @Repository
 public class CityDBStore {
-    private final BasicDataSource pool;
+    private final DataSource pool;
 
-    public CityDBStore(BasicDataSource pool) {
+    public CityDBStore(DataSource pool) {
         this.pool = pool;
     }
 

@@ -5,15 +5,16 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class PostDBStore {
-    private final BasicDataSource pool;
+    private final DataSource pool;
 
-    public PostDBStore(BasicDataSource pool) {
+    public PostDBStore(DataSource pool) {
         this.pool = pool;
     }
 

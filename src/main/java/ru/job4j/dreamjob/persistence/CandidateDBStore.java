@@ -4,15 +4,16 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class CandidateDBStore {
-    private final BasicDataSource pool;
+    private final DataSource pool;
 
-    public CandidateDBStore(BasicDataSource pool) {
+    public CandidateDBStore(DataSource pool) {
         this.pool = pool;
     }
 

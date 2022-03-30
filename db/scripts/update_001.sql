@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS city (
     id SERIAL PRIMARY KEY,
-    name TEXT
+    name VARCHAR
 );
 
 INSERT INTO city(name) VALUES ('Москва');

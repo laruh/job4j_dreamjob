@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS city (
     id SERIAL PRIMARY KEY,
-    name VARCHAR
+    name VARCHAR(100)
 );
 
 INSERT INTO city(name) VALUES ('Москва');
@@ -27,6 +27,6 @@ CREATE TABLE if not exists candidate (
 
 CREATE TABLE if not exists users (
   id SERIAL PRIMARY KEY,
-  name TEXT,
+  name VARCHAR(100),
   CONSTRAINT name_unique UNIQUE (name)
 );

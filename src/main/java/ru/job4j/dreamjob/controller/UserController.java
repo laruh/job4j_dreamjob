@@ -18,13 +18,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/usersDB")
+    @GetMapping("/users")
     public String users(Model model) {
         model.addAttribute("users", userService.findAll());
         return "users";
     }
 
-    @GetMapping("/addUserDB")
+    @GetMapping("/failUser")
+    public String fail(Model model) {
+        return "failUser";
+    }
+
+    @GetMapping("/successUser")
+    public String success(Model model) {
+        return "successUser";
+    }
+
+    @GetMapping("/addUser")
     public String addUser() {
         return "addUser";
     }
@@ -37,5 +47,15 @@ public class UserController {
             return "redirect:/failUser";
         }
         return "redirect:/successUser";
+    }
+
+    @PostMapping("/failRedirect")
+    public String failRedirect(Model model) {
+        return "redirect:/users";
+    }
+
+    @PostMapping("/successRedirect")
+    public String successRedirect(Model model) {
+        return "redirect:/users";
     }
 }

@@ -21,17 +21,17 @@ public class UserController {
     @GetMapping("/usersDB")
     public String users(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "usersDB";
+        return "users";
     }
 
     @GetMapping("/addUserDB")
     public String addUser() {
-        return "addUserDB";
+        return "addUser";
     }
 
     @PostMapping("/registrationUser")
     public String registration(Model model, @ModelAttribute User user) {
-        Optional<User> regUser = Optional.of(userService.add(user));
+        Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с таким именем уже существует");
             return "redirect:/failUser";

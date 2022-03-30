@@ -2,7 +2,6 @@ package ru.job4j.dreamjob.persistence;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
-import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.User;
 
 import java.sql.Connection;
@@ -11,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserDBStore {
@@ -24,7 +24,7 @@ public class UserDBStore {
         return new User(resultSet.getInt("id"), resultSet.getString("name"));
     }
 
-    public User add(User user) {
+    public Optional<User> add(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement statement = cn.prepareStatement("INSERT INTO users(name) VALUES(?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
@@ -38,8 +38,9 @@ public class UserDBStore {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            user = null;
         }
-        return user;
+        return Optional.ofNullable(user);
     }
 
     public List<User> findAll() {

@@ -1,15 +1,13 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Candidate {
     private int id;
     private String name;
     private String description;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-    private final String created = LocalDateTime .now().format(formatter);
+    private LocalDateTime created = LocalDateTime.now().withNano(0);
     private boolean visible;
     private byte[] photo;
 
@@ -22,10 +20,21 @@ public class Candidate {
         this.description = description;
     }
 
-    public Candidate(int id, String name, String description, byte[] photo) {
+    public Candidate(int id, String name, String description, boolean visible, byte[] photo) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.visible = visible;
+        this.photo = photo;
+    }
+
+    public Candidate(int id, String name, String description, LocalDateTime created,
+                     boolean visible, byte[] photo) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = created;
+        this.visible = visible;
         this.photo = photo;
     }
 
@@ -53,8 +62,12 @@ public class Candidate {
         this.description = description;
     }
 
-    public String getCreated() {
+    public LocalDateTime getCreated() {
         return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     public boolean isVisible() {

@@ -25,21 +25,21 @@ public class CandidateController {
         this.service = service;
     }
 
-    @GetMapping("/candidatesDB")
+    @GetMapping("/candidates")
     public String candidates(Model model) {
         model.addAttribute("candidates", service.findAll());
-        return "candidatesDB";
+        return "candidates";
     }
 
-    @GetMapping("/addCandidateDB")
+    @GetMapping("/addCandidate")
     public String addCandidate() {
-        return "addCandidateDB";
+        return "addCandidate";
     }
 
-    @GetMapping("/updateCandidateDB/{candidateId}")
+    @GetMapping("/updateCandidate/{candidateId}")
     public String updateCandidate(Model model, @PathVariable("candidateId") int id) {
         model.addAttribute("candidate", service.findById(id));
-        return "updateCandidateDB";
+        return "updateCandidate";
     }
 
     @GetMapping("/photoCandidate/{candidateId}")
@@ -60,23 +60,11 @@ public class CandidateController {
         return "redirect:/candidates";
     }
 
-    @PostMapping("/updateCandidateDB")
-    public String updateCandidate(@ModelAttribute Candidate candidate) {
-        service.update(candidate);
-        return "redirect:/candidatesDB";
-    }
-
     @PostMapping("/saveCandidate")
     public String saveCandidate(@ModelAttribute Candidate candidate,
                                 @RequestParam("file") MultipartFile file) throws IOException {
         candidate.setPhoto(file.getBytes());
         service.add(candidate);
         return "redirect:/candidates";
-    }
-
-    @PostMapping("/saveCandidateDB")
-    public String saveCandidate(@ModelAttribute Candidate candidate) {
-        service.add(candidate);
-        return "redirect:/candidatesDB";
     }
 }

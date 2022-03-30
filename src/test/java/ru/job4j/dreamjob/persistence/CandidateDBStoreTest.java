@@ -10,17 +10,17 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class CandidateDbStoreTest {
+public class CandidateDBStoreTest {
 
     @After
     public void whenDeleteFrom() {
-        CandidateDbStore store = new CandidateDbStore(new Main().loadPool());
+        CandidateDBStore store = new CandidateDBStore(new Main().loadPool());
         store.deleteFrom();
     }
 
     @Test
     public void whenCreatePost() {
-        CandidateDbStore store = new CandidateDbStore(new Main().loadPool());
+        CandidateDBStore store = new CandidateDBStore(new Main().loadPool());
         store.deleteFrom();
         Candidate candidate = new Candidate(1, "Sam", "Spring, Java 17");
         store.add(candidate);
@@ -30,7 +30,7 @@ public class CandidateDbStoreTest {
 
     @Test
     public void whenUpdatePost() {
-        CandidateDbStore store = new CandidateDbStore(new Main().loadPool());
+        CandidateDBStore store = new CandidateDBStore(new Main().loadPool());
         Candidate candidate = new Candidate(1, "Alex", "Spring, Java 17");
         store.add(candidate);
         Candidate candidateUpd = new Candidate(1, "Max", "Spring, Java 17");
@@ -41,7 +41,7 @@ public class CandidateDbStoreTest {
 
     @Test
     public void whenFindAll() {
-        CandidateDbStore store = new CandidateDbStore(new Main().loadPool());
+        CandidateDBStore store = new CandidateDBStore(new Main().loadPool());
         Candidate candidate1 = new Candidate(1, "Ivan", "Java 17");
         Candidate candidate2 = new Candidate(2, "Svetoslav", "Kotlin");
         store.add(candidate1);

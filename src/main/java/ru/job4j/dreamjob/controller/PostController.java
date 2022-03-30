@@ -12,37 +12,43 @@ import ru.job4j.dreamjob.services.PostService;
 @Controller
 public class PostController {
     private final PostService postService;
+    private final CityService cityService;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, CityService cityService) {
         this.postService = postService;
+        this.cityService = cityService;
     }
 
-    @GetMapping("/postsDB")
+    @GetMapping("/posts")
     public String posts(Model model) {
         model.addAttribute("posts", postService.findAll());
-        return "postsDB";
+        return "posts";
     }
 
-    @GetMapping("/addPostDB")
+    @GetMapping("/addPost")
     public String addPost(Model model) {
-        return "addPostDB";
+        model.addAttribute("cities", cityService.getAllCities());
+        return "addPost";
     }
 
-    @GetMapping("/updatePostDB/{postId}")
+    @GetMapping("/updatePost/{postId}")
     public String updatePost(Model model, @PathVariable("postId") int id) {
         model.addAttribute("post", postService.findById(id));
-        return "updatePostDB";
+        model.addAttribute("cities", cityService.getAllCities());
+        return "updatePost";
     }
 
-    @PostMapping("/savePostDB")
-    public String savePost(@ModelAttribute Post post) {
+    @PostMapping("/savePost")
+    public String savePost(@ModelAttribute Post post, @RequestParam("city.id") int id) {
+        post.setCity(cityService.findById(id));
         postService.add(post);
-        return "redirect:/postsDB";
+        return "redirect:/posts";
     }
 
-    @PostMapping("/updatePostDB")
-    public String updatePost(@ModelAttribute Post post) {
+    @PostMapping("/updatePost")
+    public String updatePost(@ModelAttribute Post post, @RequestParam("city.id") int id) {
+        post.setCity(cityService.findById(id));
         postService.update(post);
-        return "redirect:/postsDB";
+        return "redirect:/posts";
     }
 }

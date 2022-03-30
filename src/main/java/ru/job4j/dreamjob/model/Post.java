@@ -2,31 +2,33 @@ package ru.job4j.dreamjob.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Post implements Serializable {
     private int id;
     private String name;
     private String description;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-    private final String created = LocalDateTime .now().format(formatter);
+    private LocalDateTime created = LocalDateTime.now().withNano(0);
     private boolean visible;
     private City city;
 
     public Post() {
     }
 
-    public Post(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-
     public Post(int id, String name, String description, boolean visible, City city) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.visible = visible;
+        this.city = city;
+    }
+
+    public Post(int id, String name, String description, LocalDateTime created, boolean visible,
+                City city) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.created = created;
         this.visible = visible;
         this.city = city;
     }
@@ -55,8 +57,12 @@ public class Post implements Serializable {
         this.description = description;
     }
 
-    public String getCreated() {
+    public LocalDateTime getCreated() {
         return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     public boolean isVisible() {

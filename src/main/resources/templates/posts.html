@@ -41,7 +41,6 @@
                 <th scope="col">#Id</th>
                 <th scope="col">Имя вакансии</th>
                 <th scope="col">Описание вакансии</th>
-                <th scope="col">Дата создания</th>
                 <th scope="col">Город</th>
             </tr>
             </thead>
@@ -63,7 +62,6 @@
                     </span>
                 </td>
                 <td th:text="${post.description}"></td>
-                <td th:text="${post.created}"></td>
                 <td th:text="${post.city.name}"></td>
             </tr>
             </tbody>

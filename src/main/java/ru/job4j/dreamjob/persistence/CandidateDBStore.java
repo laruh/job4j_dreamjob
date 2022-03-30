@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CandidateDbStore {
+public class CandidateDBStore {
     private final BasicDataSource pool;
 
-    public CandidateDbStore(BasicDataSource pool) {
+    public CandidateDBStore(BasicDataSource pool) {
         this.pool = pool;
     }
 
@@ -20,7 +20,10 @@ public class CandidateDbStore {
         return new Candidate(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
-                resultSet.getString("description"));
+                resultSet.getString("description"),
+                resultSet.getTimestamp("created").toLocalDateTime().withNano(0),
+                resultSet.getBoolean("visible"),
+                resultSet.getBytes("photo"));
     }
 
     public List<Candidate> findAll() {
@@ -42,11 +45,15 @@ public class CandidateDbStore {
     public Candidate add(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(
-                     "INSERT INTO candidate(name, description) VALUES (?, ?)",
+                     "INSERT INTO candidate(name, description, created, visible, photo)"
+                             + "VALUES (?, ?, ?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
             ps.setString(2, candidate.getDescription());
+            ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
+            ps.setBoolean(4, candidate.isVisible());
+            ps.setBytes(5, candidate.getPhoto());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -62,12 +69,14 @@ public class CandidateDbStore {
     public void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(
-                     "UPDATE candidate SET name = ?, description = ? WHERE id = ?",
-                     Statement.RETURN_GENERATED_KEYS)
+                     "UPDATE candidate SET name = ?, description = ?, visible = ?, photo = ?"
+                             + "WHERE id = ?")
         ) {
             ps.setString(1, candidate.getName());
             ps.setString(2, candidate.getDescription());
-            ps.setInt(3, candidate.getId());
+            ps.setBoolean(3, candidate.isVisible());
+            ps.setBytes(4, candidate.getPhoto());
+            ps.setInt(5, candidate.getId());
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();

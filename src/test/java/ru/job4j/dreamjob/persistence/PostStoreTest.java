@@ -1,26 +1,21 @@
 package ru.job4j.dreamjob.persistence;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.dreamjob.config.DataBaseConnection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class PostStoreTest {
 
-    private static PostDBStore store;
-
-    @BeforeAll
-    public static void init() {
-        DataSource dataSource = new DataBaseConnection().loadPool();
-        store = new PostDBStore(dataSource);
-    }
+    @Autowired
+    PostDBStore store;
 
     @AfterEach
     public void whenDeleteFrom() {

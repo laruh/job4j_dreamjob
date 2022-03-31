@@ -1,6 +1,5 @@
 package ru.job4j.dreamjob.persistence;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;

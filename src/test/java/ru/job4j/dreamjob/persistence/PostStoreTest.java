@@ -1,8 +1,8 @@
 package ru.job4j.dreamjob.persistence;
 
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.config.DataBaseConnection;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
@@ -10,20 +10,19 @@ import ru.job4j.dreamjob.model.Post;
 import javax.sql.DataSource;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class PostDBStoreTest {
+class PostStoreTest {
 
     private static PostDBStore store;
 
-    @BeforeClass
+    @BeforeAll
     public static void init() {
         DataSource dataSource = new DataBaseConnection().loadPool();
         store = new PostDBStore(dataSource);
     }
 
-    @After
+    @AfterEach
     public void whenDeleteFrom() {
         store.deleteFrom();
     }
@@ -34,7 +33,7 @@ public class PostDBStoreTest {
         Post post = new Post(1, "Java", "Spring, Java 17", true, city);
         store.add(post);
         Post postInDb = store.findById(post.getId());
-        assertThat(postInDb.getName(), equalTo(post.getName()));
+        assertEquals(postInDb.getName(), post.getName());
     }
 
     @Test
@@ -45,7 +44,7 @@ public class PostDBStoreTest {
         Post postUpd = new Post(1, "Senior", "Spring, Java 17", true, city);
         store.update(postUpd);
         Post postInDb = store.findById(post.getId());
-        assertThat(postInDb.getName(), equalTo(postUpd.getName()));
+        assertEquals(postInDb.getName(), postUpd.getName());
     }
 
     @Test
@@ -57,6 +56,6 @@ public class PostDBStoreTest {
         store.add(post2);
         List<Post> exp = List.of(new Post(1, "Middle", "Java 17", false, city),
                 new Post(2, "Senior", "Kotlin", true, city));
-        assertThat(store.findAll(), equalTo(exp));
+        assertEquals(store.findAll(), exp);
     }
 }

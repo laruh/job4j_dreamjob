@@ -3,6 +3,10 @@ CREATE TABLE IF NOT EXISTS city (
     name VARCHAR(100)
 );
 
+INSERT INTO city(name) VALUES ('Москва');
+INSERT INTO city(name) VALUES ('СПб');
+INSERT INTO city(name) VALUES ('Екб');
+
 CREATE TABLE if not exists post (
    id SERIAL PRIMARY KEY,
    name TEXT,

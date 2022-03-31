@@ -3,6 +3,7 @@ package ru.job4j.dreamjob.persistence;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import ru.job4j.dreamjob.config.DataBaseConnection;
 import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
@@ -13,6 +14,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@SpringBootTest
 public class PostDBStoreTest {
 
     private static PostDBStore store;

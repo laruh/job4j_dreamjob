@@ -21,15 +21,21 @@ public class UserDBStore {
     }
 
     public User getUser(ResultSet resultSet) throws SQLException {
-        return new User(resultSet.getInt("id"), resultSet.getString("name"));
+        return new User(resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("email"),
+                resultSet.getString("password"));
     }
 
     public Optional<User> add(User user) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement statement = cn.prepareStatement("INSERT INTO users(name) VALUES(?)",
+             PreparedStatement statement = cn.prepareStatement(
+                     "INSERT INTO users(name, email, password) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPassword());
             statement.execute();
             try (ResultSet id = statement.getGeneratedKeys()) {
                 if (id.next()) {
@@ -57,5 +63,23 @@ public class UserDBStore {
             e.printStackTrace();
         }
         return users;
+    }
+
+    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement =  cn.prepareStatement(
+                     "SELECT * FROM users WHERE email = ? and password = ?")
+        ) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+            try (ResultSet it = statement.executeQuery()) {
+                if (it.next()) {
+                    return Optional.of(getUser(it));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

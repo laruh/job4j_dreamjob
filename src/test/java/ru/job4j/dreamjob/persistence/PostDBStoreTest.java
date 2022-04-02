@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.persistence;
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
-public class PostDBStoreTest {
+class PostDBStoreTest {
 
     @Autowired
     private PostDBStore store;
@@ -24,7 +25,8 @@ public class PostDBStoreTest {
     }
 
     @Test
-    public void whenCreatePost() {
+    @DisplayName("Запись поста корректно создается в бд")
+    void whenCreatePost() {
         City city = new City(1, "Москва");
         Post post = new Post(1, "Java", "Spring, Java 17", true, city);
         store.add(post);
@@ -33,7 +35,8 @@ public class PostDBStoreTest {
     }
 
     @Test
-    public void whenUpdatePost() {
+    @DisplayName("Запись поста корректно редактируется в бд")
+    void whenUpdatePost() {
         City city = new City(1, "Москва");
         Post post = new Post(1, "Middle", "Spring, Java 17", false, city);
         store.add(post);
@@ -44,7 +47,8 @@ public class PostDBStoreTest {
     }
 
     @Test
-    public void whenFindAll() {
+    @DisplayName("Корректный сбор всех постов в список из бд")
+    void whenFindAll() {
         City city = new City(1, "Москва");
         Post post1 = new Post(1, "Middle", "Java 17", false, city);
         Post post2 = new Post(2, "Senior", "Kotlin", true, city);
